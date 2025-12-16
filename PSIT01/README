@@ -1,0 +1,481 @@
+# PSIT01 - PHP & Tailwind CSS Project
+
+## 📚 Project Overview
+A modern educational platform website built with PHP and Tailwind CSS (CDN), inspired by UpSkwela.com. This project demonstrates clean PHP architecture, component-based design, and responsive UI using Tailwind CSS.
+
+**Project Name:** PSIT01 
+**Started:** December 16, 2025  
+**Developer:** Norruu  
+**Tech Stack:** PHP, Tailwind CSS (CDN), JavaScript, HTML5
+
+---
+
+## 🎯 What I've Accomplished Today
+
+### ✅ Step 1: Project Structure Setup
+Created a well-organized folder structure following best practices: 
+
+```
+PSIT01/
+│
+├── index.php                 # Homepage
+├── about.php                 # About page (placeholder)
+├── courses.php               # Courses listing page
+├── contact.php               # Contact page (placeholder)
+├── config.php                # Site-wide configuration
+│
+├── includes/                 # Reusable layout components
+│   ├── header.php           # HTML head with Tailwind CDN
+│   ├── footer.php           # Footer section
+│   └── nav.php              # Navigation bar
+│
+├── components/              # Reusable UI components
+│   ├── hero. php             # Hero section (not created yet)
+│   ├── course-card.php      # Course card component
+│   ├── category-card.php    # Category card (not created yet)
+│   └── testimonial. php      # Testimonial component (not created yet)
+│
+├── data/                    # Mock data
+│   └── courses.php          # Course data array
+│
+├── assets/                  # Static files
+│   ├── css/
+│   │   └── custom. css       # Custom styles
+│   ├── js/
+│   │   └── main.js          # JavaScript interactions
+│   └── images/              # Image folder
+│       └── . gitkeep
+│
+└── README.md                # This file
+```
+
+**Key Learnings:**
+- Understanding separation of concerns (data, components, layout)
+- Why each folder exists and its purpose
+- Project organization best practices
+
+---
+
+### ✅ Step 2: Configuration & Layout Files
+
+#### **1. config.php** - Site Configuration
+```php
+- Site constants (SITE_NAME, SITE_URL, SITE_DESCRIPTION)
+- Navigation menu array ($nav_items)
+- Helper function:  isActive() for highlighting current page
+```
+
+**Key Learnings:**
+- Using PHP constants with `define()`
+- Centralized configuration management
+- Helper functions for reusable logic
+
+#### **2. includes/header.php** - HTML Head Section
+```php
+- DOCTYPE and HTML structure
+- Tailwind CSS CDN integration
+- Custom Tailwind configuration (primary, secondary, accent colors)
+- Font Awesome CDN for icons
+- Dynamic page titles
+```
+
+**Key Learnings:**
+- How to include Tailwind via CDN
+- Customizing Tailwind configuration inline
+- Dynamic page title system
+
+#### **3. includes/nav.php** - Navigation Bar
+```php
+- Responsive navigation (desktop & mobile)
+- Dynamic menu generation from $nav_items array
+- Active page highlighting
+- Mobile menu toggle button
+- Sticky navigation (stays at top when scrolling)
+```
+
+**Key Learnings:**
+- `foreach` loops for menu generation
+- Responsive design with Tailwind (hidden md:block)
+- Sticky positioning with `sticky top-0 z-50`
+
+**Bug Fixed:**
+- PHP tag spacing errors:  `<? php` → `<?php` (no space!)
+
+---
+
+### ✅ Step 3: Footer, Custom Styles & Homepage
+
+#### **1. includes/footer.php** - Footer Section
+```php
+- Multi-column footer layout
+- Social media links
+- Quick links (reusing $nav_items)
+- Contact information
+- Dynamic copyright year with date('Y')
+- Closes </body> and </html> tags
+```
+
+**Key Learnings:**
+- Grid layout for responsive footer
+- Reusing navigation data for consistency
+- PHP date functions
+
+#### **2. assets/css/custom.css** - Custom Styles
+```css
+- Fade-in animations (@keyframes fadeIn)
+- Active navigation styling
+- Hero gradient background
+- Card hover effects
+- Custom button styles (btn-primary, btn-secondary)
+- Smooth scrolling
+```
+
+**Key Learnings:**
+- CSS animations and transitions
+- Complementing Tailwind with custom CSS
+- When to use custom CSS vs Tailwind classes
+
+#### **3. assets/js/main.js** - JavaScript Interactions
+```javascript
+- Mobile menu toggle functionality
+- Click outside to close menu
+- Smooth scroll for anchor links
+- Intersection Observer for scroll animations
+- Animate-on-scroll functionality
+```
+
+**Key Learnings:**
+- DOM manipulation with vanilla JavaScript
+- Event listeners (DOMContentLoaded, click)
+- Intersection Observer API for scroll animations
+
+#### **4. index.php** - Homepage
+```php
+- Hero section with gradient background
+- Features section (3 columns:  Expert Instructors, Certifications, Flexible Learning)
+- Categories section (8 categories in grid layout)
+- CTA (Call-to-Action) section
+- Responsive design throughout
+```
+
+**Key Learnings:**
+- "Sandwich" structure:  header → content → footer
+- `require_once` vs `include`
+- Inline PHP arrays for categories
+- Grid layouts with Tailwind
+- Responsive breakpoints (md:, lg:)
+
+**Bug Fixed:**
+- More PHP spacing errors in footer and index.php
+
+---
+
+### ✅ Step 4: Course Data & Components
+
+#### **1. data/courses.php** - Course Data Array
+```php
+- 6 sample courses with complete information
+- Each course includes: id, title, description, instructor, category, price, duration, lessons, students, rating, level, image, featured status
+- Helper functions: 
+  - getFeaturedCourses() - Filter featured courses
+  - getCoursesByCategory() - Filter by category
+  - formatPrice() - Format price as Philippine Peso
+```
+
+**Key Learnings:**
+- Associative arrays for structured data
+- `array_filter()` with callback functions
+- Using Unsplash for placeholder images
+- Data structure design (preparing for database migration)
+
+#### **2. components/course-card.php** - Reusable Course Card
+```php
+- Complete course card UI
+- Discount badge calculation and display
+- Dynamic star rating generation
+- Course stats (duration, lessons, students)
+- Price display with strikethrough for original price
+- Responsive design
+```
+
+**Key Learnings:**
+- Component-based architecture in PHP
+- Dynamic discount calculation
+- Loop-based star rating display
+- Tailwind utility classes for complex layouts
+- `line-clamp-2` for text truncation
+
+#### **3. courses.php** - Courses Listing Page
+```php
+- Page header with course count
+- Filter buttons (static for now)
+- Grid layout displaying all courses
+- Featured courses section
+- Using foreach to loop through courses
+- Including course-card component in loop
+```
+
+**Key Learnings:**
+- How components receive data through variables
+- `count()` for array length
+- Sticky filter bar (below navigation)
+- Including components inside loops
+- Helper function usage
+
+---
+
+## 🎨 Customizations You Made
+
+### Hero Section Gradient
+**Original:**
+```css
+.hero-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+```
+
+**Your Customization:**
+```html
+<section class="bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-black py-20">
+```
+
+**Key Learning:**
+- Two ways to add gradients: Custom CSS class vs Tailwind utilities
+- Tailwind gradient syntax:  `bg-gradient-to-{direction} from-{color} to-{color}`
+- Text color contrast considerations
+
+---
+
+## 🔧 Technologies & Tools Used
+
+### Backend
+- **PHP** - Server-side scripting
+- **Apache** (via XAMPP) - Web server
+
+### Frontend
+- **Tailwind CSS** (CDN v3. x) - Utility-first CSS framework
+- **Font Awesome** (v6.4.0) - Icon library
+- **Unsplash** - Free stock images for course placeholders
+
+### JavaScript
+- **Vanilla JS** - No frameworks/libraries
+- **Intersection Observer API** - Scroll animations
+- **DOM Manipulation** - Interactive features
+
+---
+
+## 🐛 Bugs Fixed Today
+
+1. **PHP Tag Spacing Errors** (occurred 3 times)
+   - **Error:** `<? php` with space
+   - **Fix:** `<?php` (no space)
+   - **Affected files:** header.php, nav.php, footer.php, index.php
+   - **Lesson:** Always check PHP tags when copying code
+
+---
+
+## 📖 Key Concepts Learned
+
+### PHP Concepts
+1. **`require_once` vs `include`**
+   - `require_once`: Critical files, loads once, fatal error if missing
+   - `include`: Can load multiple times, warning if missing
+
+2. **Associative Arrays**
+   - Key-value pair data structures
+   - Perfect for structured data like courses
+
+3. **Array Functions**
+   - `array_filter()` - Filter arrays with conditions
+   - `count()` - Get array length
+   - `number_format()` - Format numbers
+
+4. **Component Pattern**
+   - Variables in parent scope available in included files
+   - Reusable UI components
+   - Separation of concerns
+
+### Tailwind CSS Concepts
+1. **Utility-First Approach**
+   - Classes like `bg-white`, `px-4`, `rounded-lg`
+   - Responsive prefixes:  `md:`, `lg:`
+   - State variants: `hover:`, `focus:`
+
+2. **Grid System**
+   - `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
+   - Responsive column layout
+   - Gap utilities for spacing
+
+3. **Flexbox**
+   - `flex justify-between items-center`
+   - `flex-col sm:flex-row` for responsive direction
+
+4. **Custom Configuration**
+   - Inline config with `tailwind.config`
+   - Custom color definitions
+
+### JavaScript Concepts
+1. **Event Handling**
+   - `DOMContentLoaded` - Wait for page load
+   - `click` events for interactivity
+
+2. **DOM Queries**
+   - `getElementById()`, `querySelector()`
+   - `querySelectorAll()` for multiple elements
+
+3. **Intersection Observer**
+   - Detect when elements enter viewport
+   - Trigger animations on scroll
+
+---
+
+## 📝 Current Project Status
+
+### ✅ Completed Pages
+- **Homepage (index.php)** - Fully functional with hero, features, categories, CTA
+- **Courses Page (courses.php)** - Displays all courses with filtering UI
+
+### 🚧 Placeholder Pages (To be built)
+- **About Page (about.php)** - Not created yet
+- **Contact Page (contact.php)** - Not created yet
+- **Course Detail Page (course-detail.php)** - Not created yet (linked from course cards)
+
+### 🚧 Components Not Yet Used
+- `components/hero.php` - Not created (using inline hero in index.php)
+- `components/category-card.php` - Not created
+- `components/testimonial.php` - Not created
+
+---
+
+## 🚀 Next Steps (When You Continue)
+
+### Step 5: About & Contact Pages
+- Create About page with team, mission, values
+- Create Contact page with form
+- Add form validation (PHP & JavaScript)
+
+### Step 6: Course Detail Page
+- Create `course-detail.php? id={course_id}`
+- Display full course information
+- Add curriculum/lessons section
+- Include reviews/testimonials
+
+### Step 7: Search & Filter Functionality
+- Implement JavaScript filtering on courses page
+- Add search functionality
+- Filter by category, price, level, rating
+
+### Step 8: Additional Features
+- Add testimonials section to homepage
+- Create newsletter subscription form
+- Add FAQ section
+- Improve mobile responsiveness
+
+### Step 9: Polish & Optimization
+- Add loading animations
+- Optimize images
+- Add meta tags for SEO
+- Create 404 error page
+- Add breadcrumbs navigation
+
+---
+
+## 💻 How to Run This Project
+
+### Prerequisites
+- **XAMPP** (or any PHP server)
+- Web browser (Chrome, Firefox, Edge, etc.)
+
+### Setup Instructions
+1. **Place project folder** in XAMPP's `htdocs` directory: 
+   ```
+   C:\xampp\htdocs\PSIT01\
+   ```
+
+2. **Start Apache** in XAMPP Control Panel
+
+3. **Open browser** and navigate to:
+   ```
+   http://localhost/PSIT01/index.php
+   ```
+
+4. **Update SITE_URL** in `config.php` if needed:
+   ```php
+   define('SITE_URL', 'http://localhost/PSIT01');
+   ```
+
+---
+
+## 📚 Important Files Reference
+
+### Configuration
+- **config.php** - All site-wide settings and navigation
+
+### Layouts
+- **includes/header.php** - Opening HTML, Tailwind CDN
+- **includes/nav.php** - Navigation bar
+- **includes/footer.php** - Footer, closing HTML
+
+### Pages
+- **index.php** - Homepage
+- **courses.php** - All courses listing
+
+### Data
+- **data/courses.php** - Course array and helper functions
+
+### Components
+- **components/course-card.php** - Reusable course card
+
+### Assets
+- **assets/css/custom.css** - Custom styles
+- **assets/js/main.js** - JavaScript functionality
+
+---
+
+## 🔗 Useful Resources
+
+### Tailwind CSS
+- Documentation: https://tailwindcss.com/docs
+- CDN Setup: https://tailwindcss.com/docs/installation/play-cdn
+- Gradient Generator: https://tailwindcomponents.com/gradient-generator
+
+### PHP
+- Official Docs: https://www.php.net/docs.php
+- Array Functions: https://www.php.net/manual/en/ref.array.php
+
+### Icons & Images
+- Font Awesome: https://fontawesome.com/icons
+- Unsplash: https://unsplash.com/
+
+---
+
+## 📊 Project Statistics
+
+- **Total Files Created:** 12
+- **Lines of Code:** ~800+
+- **Components:** 1 (course-card)
+- **Pages:** 2 functional (index, courses)
+- **Data Entries:** 6 courses
+- **Time Spent:** Full learning session with step-by-step guidance
+
+---
+
+## 🎯 Learning Achievements
+
+✅ PHP basics and file organization  
+✅ Tailwind CSS utility-first approach  
+✅ Responsive design principles  
+✅ Component-based architecture  
+✅ JavaScript DOM manipulation  
+✅ Array operations and filtering  
+✅ Git-ready project structure  
+✅ Debugging PHP syntax errors  
+
+---
+
+## 🙏 Acknowledgments
+
+- **UpSkwela. com** - Design inspiration
+- **Tailwind CSS** - Amazing utility framework
+- **Unsplash** - Free high-quality images
+- **Font Awesome** - Beautiful icons

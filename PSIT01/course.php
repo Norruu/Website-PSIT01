@@ -1,9 +1,14 @@
 <?php
+
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include configuration
 require_once 'config.php';
 
 // Include course data
-require_once 'data/courses. php';
+require_once 'data/courses.php';
 
 // Set page title
 $page_title = 'All Courses';
@@ -52,7 +57,7 @@ include 'includes/nav.php';
         <!-- Courses Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php foreach($courses as $course): ?>
-                <?php include 'components/course-card. php'; ?>
+                <?php include 'components/course-card.php'; ?>
             <?php endforeach; ?>
         </div>
     </div>

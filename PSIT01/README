@@ -24,16 +24,16 @@ PSIT01/
 ├── contact.php               # Contact page (placeholder)
 ├── config.php                # Site-wide configuration
 │
-├── includes/                 # Reusable layout components
+├── includes/                # Reusable layout components
 │   ├── header.php           # HTML head with Tailwind CDN
 │   ├── footer.php           # Footer section
 │   └── nav.php              # Navigation bar
 │
 ├── components/              # Reusable UI components
-│   ├── hero. php             # Hero section (not created yet)
+│   ├── hero. php            # Hero section (not created yet)
 │   ├── course-card.php      # Course card component
 │   ├── category-card.php    # Category card (not created yet)
-│   └── testimonial. php      # Testimonial component (not created yet)
+│   └── testimonial. php     # Testimonial component (not created yet)
 │
 ├── data/                    # Mock data
 │   └── courses.php          # Course data array

@@ -23,7 +23,7 @@ include 'includes/nav.php';
                 Discover thousands of courses in technologys
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll">
-                <a href="courses.php" class="btn-primary inline-block">
+                <a href="course.php" class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">
                     <i class="fas fa-book-open mr-2"></i>
                     Browse Courses
                 </a>

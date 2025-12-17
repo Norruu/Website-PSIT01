@@ -7,8 +7,8 @@ define('SITE_DESCRIPTION', 'Learn and grow with online courses focusing on PSIT0
 // Navigation Menu Items
 $nav_items = [
     ['name' => 'Home', 'url' => 'index.php'],
-    ['name' => 'About', 'url' => 'about. php'],
-    ['name' => 'Courses', 'url' => 'courses.php'],
+    ['name' => 'About', 'url' => 'about.php'],
+    ['name' => 'Courses', 'url' => 'course.php'],
     ['name' => 'Contact', 'url' => 'contact.php'],
 ];
 

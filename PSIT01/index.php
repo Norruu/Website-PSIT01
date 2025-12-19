@@ -98,7 +98,7 @@ include 'includes/nav.php';
             foreach($categories as $category):
             ?>
                 <a href="<?php echo SITE_URL; ?>/courses.php?category=<?php echo urlencode($category['name']); ?>" 
-                   class="group bg-gray-50 hover:bg-primary hover:text-white p-6 rounded-lg text-center transition duration-300 card-hover animate-on-scroll">
+                   class="group bg-gray-50 hover:bg-gradient-to-bl from-violet-500 to-fuchsia-500 hover:text-white p-6 rounded-lg text-center transition duration-300 card-hover animate-on-scroll">
                     <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">
                         <i class="fas <?php echo $category['icon']; ?>"></i>
                     </div>

@@ -1,10 +1,4 @@
 <?php
-/**
- * Course Card Component
- * 
- * Usage:  include this file inside a loop
- * Required variable: $course (array with course data)
- */
 
 // Calculate discount percentage
 $discount = 0;
@@ -26,7 +20,7 @@ if ($course['original_price'] > $course['price']) {
             </span>
         <?php endif; ?>
         
-        <span class="absolute top-2 left-2 bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold">
+        <span class="absolute top-2 left-2 bg-violet-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
             <?php echo $course['level']; ?>
         </span>
     </div>
@@ -98,7 +92,7 @@ if ($course['original_price'] > $course['price']) {
                 <?php endif; ?>
             </div>
             <a href="course-detail.php?id=<?php echo $course['id']; ?>" 
-               class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm font-semibold">
+               class="bg-violet-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm font-semibold">
                 View Course
             </a>
         </div>

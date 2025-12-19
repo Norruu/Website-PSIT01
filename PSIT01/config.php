@@ -17,4 +17,15 @@ function isActive($page) {
     $current_page = basename($_SERVER['PHP_SELF']);
     return $current_page === $page ?  'active' : '';
 }
+
+// Get full active classes
+function getActiveClass($page) {
+    $current_page = basename($_SERVER['PHP_SELF']);
+    if ($current_page === $page) {
+        // ACTIVE:  Purple background with white text and slight shadow
+        return 'bg-purple-600 text-white shadow-md';
+    }
+    // INACTIVE: Gray text with purple hover
+    return 'text-gray-700 hover:bg-purple-600 hover:text-white';
+}
 ?>

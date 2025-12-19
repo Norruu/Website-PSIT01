@@ -11,13 +11,17 @@
 }
 
 .fade-in {
-    animation:  fadeIn 0.6s ease-out;
+    animation: fadeIn 0.6s ease-out;
 }
 
 /* Active Navigation Link */
 .active {
-    background-color: #4F46E5;
+    background-color: #9333EA;
     color: white;
+}
+
+.active:hover {
+    background-color: #7E22CE;
 }
 
 /* Smooth Scrolling */
@@ -46,7 +50,7 @@ html {
 }
 
 .btn-primary:hover {
-    background-color: #4338CA;
+    background-color: #abaed9;
     transform: scale(1.05);
 }
 
@@ -63,3 +67,9 @@ html {
     background-color: #0891B2;
     transform: scale(1.05);
 }
+
+ #sort-select option:hover,
+    #sort-select option:checked {
+        background-color: rgb(124 58 237);
+        color: white;
+    }

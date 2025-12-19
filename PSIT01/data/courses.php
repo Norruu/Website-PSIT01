@@ -1,120 +1,138 @@
 <?php
-// Course Data Array
-$courses = [
-    [
-        'id' => 1,
-        'title' => 'Complete Web Development Bootcamp',
-        'description' => 'Learn HTML, CSS, JavaScript, PHP, and MySQL from scratch.  Build real-world projects and become a full-stack developer.',
-        'instructor' => 'John Doe',
-        'category' => 'Programming',
-        'price' => 2999,
-        'original_price' => 4999,
-        'duration' => '40 hours',
-        'lessons' => 120,
-        'students' => 15234,
-        'rating' => 4.8,
-        'level' => 'Beginner',
-        'image' => 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500',
-        'featured' => true
-    ],
-    [
-        'id' => 2,
-        'title' => 'Graphic Design Masterclass',
-        'description' => 'Master Adobe Photoshop, Illustrator, and InDesign. Create stunning designs for print and digital media.',
-        'instructor' => 'Jane Smith',
-        'category' => 'Design',
-        'price' => 1999,
-        'original_price' => 3499,
-        'duration' => '25 hours',
-        'lessons' => 85,
-        'students' => 8932,
-        'rating' => 4.7,
-        'level' => 'Intermediate',
-        'image' => 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500',
-        'featured' => true
-    ],
-    [
-        'id' => 3,
-        'title' => 'Digital Marketing Strategy',
-        'description' => 'Learn SEO, social media marketing, content marketing, and email campaigns. Grow your business online.',
-        'instructor' => 'Mike Johnson',
-        'category' => 'Marketing',
-        'price' => 1799,
-        'original_price' => 2999,
-        'duration' => '18 hours',
-        'lessons' => 65,
-        'students' => 12456,
-        'rating' => 4.6,
-        'level' => 'Beginner',
-        'image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500',
-        'featured' => true
-    ],
-    [
-        'id' => 4,
-        'title' => 'Python Programming for Beginners',
-        'description' => 'Start your programming journey with Python. Learn basics, data structures, and build practical projects.',
-        'instructor' => 'Sarah Williams',
-        'category' => 'Programming',
-        'price' => 1499,
-        'original_price' => 2499,
-        'duration' => '30 hours',
-        'lessons' => 95,
-        'students' => 18765,
-        'rating' => 4.9,
-        'level' => 'Beginner',
-        'image' => 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=500',
-        'featured' => false
-    ],
-    [
-        'id' => 5,
-        'title' => 'Business Strategy & Management',
-        'description' => 'Develop essential business skills including strategic planning, leadership, and project management.',
-        'instructor' => 'Robert Brown',
-        'category' => 'Business',
-        'price' => 2499,
-        'original_price' => 3999,
-        'duration' => '22 hours',
-        'lessons' => 75,
-        'students' => 6543,
-        'rating' => 4.5,
-        'level' => 'Intermediate',
-        'image' => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500',
-        'featured' => false
-    ],
-    [
-        'id' => 6,
-        'title' => 'Photography Fundamentals',
-        'description' => 'Master camera settings, composition, lighting, and post-processing.  Capture stunning photos.',
-        'instructor' => 'Emily Davis',
-        'category' => 'Photography',
-        'price' => 1299,
-        'original_price' => 2199,
-        'duration' => '15 hours',
-        'lessons' => 50,
-        'students' => 9876,
-        'rating' => 4.7,
-        'level' => 'Beginner',
-        'image' => 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=500',
-        'featured' => false
-    ]
-];
+/**
+ * Course Data Functions - Now using Database
+ */
 
-// Helper function to get featured courses
-function getFeaturedCourses($courses) {
-    return array_filter($courses, function($course) {
-        return $course['featured'] === true;
-    });
+// Include database connection
+require_once __DIR__ . '/../db/db.php';
+
+/**
+ * Get all courses from database
+ */
+function getAllCourses() {
+    return fetchAll("SELECT * FROM courses ORDER BY created_at DESC");
 }
 
-// Helper function to get courses by category
+/**
+ * Get course by ID
+ */
+function getCourseById($id) {
+    return fetchOne("SELECT * FROM courses WHERE id = :id", ['id' => $id]);
+}
+
+/**
+ * Get featured courses
+ */
+function getFeaturedCourses($courses = null) {
+    // If courses array is passed (for backward compatibility)
+    if ($courses !== null) {
+        return array_filter($courses, function($course) {
+            return $course['featured'] == 1;
+        });
+    }
+    // Otherwise get from database
+    return fetchAll("SELECT * FROM courses WHERE featured = 1 ORDER BY rating DESC LIMIT 3");
+}
+
+/**
+ * Get courses by category
+ */
 function getCoursesByCategory($courses, $category) {
-    return array_filter($courses, function($course) use ($category) {
-        return $course['category'] === $category;
-    });
+    // If courses array is passed (for backward compatibility)
+    if (is_array($courses)) {
+        return array_filter($courses, function($course) use ($category) {
+            return $course['category'] === $category;
+        });
+    }
+    // Otherwise get from database
+    return fetchAll("SELECT * FROM courses WHERE category = :category", ['category' => $category]);
 }
 
-// Helper function to format price
+/**
+ * Search courses
+ */
+function searchCourses($search) {
+    $search = "%$search%";
+    return fetchAll(
+        "SELECT * FROM courses 
+         WHERE title LIKE : search 
+         OR description LIKE :search2 
+         OR instructor LIKE : search3",
+        ['search' => $search, 'search2' => $search, 'search3' => $search]
+    );
+}
+
+/**
+ * Filter and sort courses
+ */
+function filterCourses($search = '', $category = '', $sort = '') {
+    $sql = "SELECT * FROM courses WHERE 1=1";
+    $params = [];
+    
+    // Apply search filter
+    if (! empty($search)) {
+        $sql .= " AND (title LIKE :search OR description LIKE : search OR instructor LIKE :search)";
+        $params['search'] = "%$search%";
+    }
+    
+    // Apply category filter
+    if (!empty($category)) {
+        $sql .= " AND category = :category";
+        $params['category'] = $category;
+    }
+    
+    // Apply sorting
+    switch($sort) {
+        case 'price_low':
+            $sql .= " ORDER BY price ASC";
+            break;
+        case 'price_high':
+            $sql .= " ORDER BY price DESC";
+            break;
+        case 'rating':
+            $sql .= " ORDER BY rating DESC";
+            break;
+        case 'popular':
+            $sql .= " ORDER BY students DESC";
+            break;
+        default:
+            $sql .= " ORDER BY created_at DESC";
+    }
+    
+    return fetchAll($sql, $params);
+}
+
+/**
+ * Get all unique categories
+ */
+function getAllCategories() {
+    return fetchAll("SELECT DISTINCT category FROM courses ORDER BY category");
+}
+
+/**
+ * Get categories from categories table
+ */
+function getCategoriesWithIcons() {
+    return fetchAll("SELECT * FROM categories ORDER BY name");
+}
+
+/**
+ * Format price helper
+ */
 function formatPrice($price) {
     return '₱' . number_format($price, 2);
 }
+
+/**
+ * Calculate discount percentage
+ */
+function calculateDiscount($original_price, $price) {
+    if ($original_price > $price) {
+        return round((($original_price - $price) / $original_price) * 100);
+    }
+    return 0;
+}
+
+// For backward compatibility, get all courses into $courses variable
+$courses = getAllCourses();
 ?>

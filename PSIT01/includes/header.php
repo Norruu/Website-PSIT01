@@ -15,7 +15,7 @@ $page_title = isset($page_title) ? $page_title . ' - ' . SITE_NAME : SITE_NAME;
     
     <!-- Tailwind Configuration -->
     <script>
-        tailwind. config = {
+        tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -29,7 +29,7 @@ $page_title = isset($page_title) ? $page_title . ' - ' . SITE_NAME : SITE_NAME;
     </script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/custom. css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/custom.css">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

@@ -13,7 +13,7 @@ include 'includes/nav.php';
 ?>
 
 <!-- Page Header -->
-<section class="bg-gradient-to-r from-primary to-secondary text-white py-20">
+<section class="bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 class="text-4xl md:text-6xl font-bold mb-4">About PSIT01</h1>
         <p class="text-xl text-gray-100">
@@ -57,7 +57,7 @@ include 'includes/nav.php';
 </section>
 
 <!-- Stats Section -->
-<section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+<section class="py-16 bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <!-- Stat 1 -->
@@ -236,7 +236,7 @@ include 'includes/nav.php';
 </section>
 
 <!-- CTA Section -->
-<section class="py-16 bg-primary text-white">
+<section class="py-16 bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg: px-8 text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">
             Join Our Learning Community

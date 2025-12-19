@@ -2,6 +2,9 @@
 // Include configuration
 require_once 'config.php';
 
+// Include database
+require_once 'db/db.php';
+
 // Set page title
 $page_title = 'Contact Us';
 
@@ -13,7 +16,7 @@ $error_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data and sanitize
     $name = htmlspecialchars(trim($_POST['name'] ?? ''));
-    $email = htmlspecialchars(trim($_POST['email'] ?? ''));
+    $email = htmlspecialchars(trim($_POST['email'] ??  ''));
     $subject = htmlspecialchars(trim($_POST['subject'] ?? ''));
     $message = htmlspecialchars(trim($_POST['message'] ?? ''));
     
@@ -40,18 +43,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Message must be at least 10 characters';
     }
     
-    // If no errors, process the form
+    // If no errors, save to database
     if (empty($errors)) {
-        // Here you would typically: 
-        // 1. Send an email
-        // 2. Save to database
-        // 3. Send to CRM system
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'subject' => $subject,
+            'message' => $message,
+            'status' => 'new'
+        ];
         
-        // For now, we'll just show a success message
-        $success_message = 'Thank you for contacting us! We\'ll get back to you soon.';
+        $result = insert('contact_messages', $data);
         
-        // Clear form data
-        $name = $email = $subject = $message = '';
+        if ($result) {
+            $success_message = 'Thank you for contacting us! We\'ll get back to you soon.';
+            // Clear form data
+            $name = $email = $subject = $message = '';
+        } else {
+            $error_message = 'Sorry, there was an error sending your message. Please try again.';
+        }
     } else {
         $error_message = implode('<br>', $errors);
     }
@@ -65,7 +75,7 @@ include 'includes/nav.php';
 ?>
 
 <!-- Page Header -->
-<section class="bg-gradient-to-r from-primary to-secondary text-white py-20">
+<section class="bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 class="text-4xl md:text-6xl font-bold mb-4">Get In Touch</h1>
         <p class="text-xl text-gray-100">
@@ -106,8 +116,8 @@ include 'includes/nav.php';
                         </div>
                         <div>
                             <h3 class="font-semibold text-gray-800 mb-1">Call Us</h3>
-                            <p class="text-gray-600">+63 (2) 123-4567</p>
-                            <p class="text-gray-600">+63 917 123 4567</p>
+                            <p class="text-gray-600">+63 919 660 2047</p>
+                            <p class="text-gray-600">+63 936 996 7871</p>
                         </div>
                     </div>
                     
@@ -142,16 +152,16 @@ include 'includes/nav.php';
                 <div class="mt-8">
                     <h3 class="font-semibold text-gray-800 mb-4">Follow Us</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="bg-gray-200 hover:bg-primary hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition">
+                        <a href="#" class="bg-gray-200 hover:bg-violet-600 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition">
                             <i class="fab fa-facebook text-xl"></i>
                         </a>
-                        <a href="#" class="bg-gray-200 hover:bg-primary hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition">
+                        <a href="#" class="bg-gray-200 hover:bg-violet-600 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition">
                             <i class="fab fa-twitter text-xl"></i>
                         </a>
-                        <a href="#" class="bg-gray-200 hover:bg-primary hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition">
+                        <a href="#" class="bg-gray-200 hover:bg-violet-600 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition">
                             <i class="fab fa-instagram text-xl"></i>
                         </a>
-                        <a href="#" class="bg-gray-200 hover:bg-primary hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition">
+                        <a href="#" class="bg-gray-200 hover:bg-violet-600 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition">
                             <i class="fab fa-linkedin text-xl"></i>
                         </a>
                     </div>
@@ -189,7 +199,7 @@ include 'includes/nav.php';
                                id="name" 
                                name="name" 
                                value="<?php echo $name ??  ''; ?>"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus: ring-2 focus:ring-primary"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus: ring-2 focus:ring-violet-600"
                                placeholder="Juan Dela Cruz"
                                required>
                     </div>
@@ -203,7 +213,7 @@ include 'includes/nav.php';
                                id="email" 
                                name="email" 
                                value="<?php echo $email ?? ''; ?>"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600"
                                placeholder="juan@example.com"
                                required>
                     </div>
@@ -217,7 +227,7 @@ include 'includes/nav.php';
                                id="subject" 
                                name="subject" 
                                value="<?php echo $subject ?? ''; ?>"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600"
                                placeholder="Course Inquiry"
                                required>
                     </div>
@@ -230,14 +240,14 @@ include 'includes/nav.php';
                         <textarea id="message" 
                                   name="message" 
                                   rows="5"
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus: ring-primary"
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus: ring-violet-600"
                                   placeholder="Tell us more about your inquiry..."
                                   required><?php echo $message ?? ''; ?></textarea>
                     </div>
                     
                     <!-- Submit Button -->
                     <button type="submit" 
-                            class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
+                            class="w-full bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
                         <i class="fas fa-paper-plane mr-2"></i>
                         Send Message
                     </button>

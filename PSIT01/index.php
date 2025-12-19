@@ -13,7 +13,7 @@ include 'includes/nav.php';
 ?>
 
 <!-- Hero Section -->
-<section class="bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-black py-20">
+<section class="bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-on-scroll">
@@ -81,45 +81,41 @@ include 'includes/nav.php';
 </section>
 
 <!-- Categories Section -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
-            Popular Categories
-        </h2>
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm: px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Popular Categories</h2>
+            <p class="text-gray-600">Explore our wide range of course categories</p>
+        </div>
         
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <?php
-            $categories = [
-                ['name' => 'Programming', 'icon' => 'fa-code', 'color' => 'bg-blue-500'],
-                ['name' => 'Design', 'icon' => 'fa-palette', 'color' => 'bg-pink-500'],
-                ['name' => 'Business', 'icon' => 'fa-briefcase', 'color' => 'bg-green-500'],
-                ['name' => 'Marketing', 'icon' => 'fa-bullhorn', 'color' => 'bg-orange-500'],
-                ['name' => 'Photography', 'icon' => 'fa-camera', 'color' => 'bg-purple-500'],
-                ['name' => 'Music', 'icon' => 'fa-music', 'color' => 'bg-red-500'],
-                ['name' => 'Health', 'icon' => 'fa-heartbeat', 'color' => 'bg-teal-500'],
-                ['name' => 'Languages', 'icon' => 'fa-language', 'color' => 'bg-indigo-500'],
-            ];
+            <?php 
+            // Get categories from database
+            require_once 'db/db.php';
+            require_once 'data/courses.php';
+            $categories = getCategoriesWithIcons();
             
             foreach($categories as $category):
             ?>
-                <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center animate-on-scroll">
-                    <div class="<?php echo $category['color']; ?> text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas <?php echo $category['icon']; ?> text-xl"></i>
+                <a href="<?php echo SITE_URL; ?>/courses.php?category=<?php echo urlencode($category['name']); ?>" 
+                   class="group bg-gray-50 hover:bg-primary hover:text-white p-6 rounded-lg text-center transition duration-300 card-hover animate-on-scroll">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">
+                        <i class="fas <?php echo $category['icon']; ?>"></i>
                     </div>
-                    <h3 class="font-semibold text-gray-800"><?php echo $category['name']; ?></h3>
-                </div>
+                    <h3 class="font-semibold"><?php echo $category['name']; ?></h3>
+                </a>
             <?php endforeach; ?>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="py-16 bg-primary text-white">
+<section class="py-16 bg-gradient-to-bl from-violet-500 to-fuchsia-500 text-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg: px-8 text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">
             Ready to Start Learning?
         </h2>
-        <p class="text-xl mb-8">
+        <p class="text-xl text-gray-800 mb-8">
             Join thousands of students already learning on PSIT01
         </p>
         <a href="courses.php" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">
